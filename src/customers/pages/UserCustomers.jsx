@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 
-import CustomerList from "../components/CustomerList";
-const DUMMY_CUSTOMER = [
+import CustomerList from "../components/CustomerList.jsx";
+
+const DUMMY_CUSTOMERS = [
   {
     id: "c1",
     name: "kim",
@@ -22,7 +23,7 @@ const DUMMY_CUSTOMER = [
 
 const UserCustomers = () => {
   const userId = useParams().userId;
-  const loadedCustomers = DUMMY_CUSTOMER.filter(
+  const loadedCustomers = DUMMY_CUSTOMERS.filter(
     (customer) => customer.creator === userId
   );
   return <CustomerList items={loadedCustomers} />;

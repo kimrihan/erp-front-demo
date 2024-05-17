@@ -1,5 +1,6 @@
 import Card from "../../shared/components/UIElements/Card.jsx";
 import CustomerItem from "./CustomerItem.jsx";
+import Button from "../../shared/components/FormElements/Button.jsx";
 
 import "./CustomerList.css";
 const CustomerList = (props) => {
@@ -8,7 +9,7 @@ const CustomerList = (props) => {
       <div className="customer-list center">
         <Card>
           <h2>고객이 없습니다. 고객을 등록 하시겠습니까?</h2>
-          <button>share place</button>
+          <Button to="/customers/new">share place</Button>
         </Card>
       </div>
     );

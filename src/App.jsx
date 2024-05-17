@@ -7,8 +7,10 @@ import {
 
 import Users from "./users/pages/Users.jsx";
 import NewCustomer from "./customers/pages/NewCustomer.jsx";
-import MainNavigation from "./shared/components/Navigation/MainNavigation.jsx";
 import UserCustomers from "./customers/pages/UserCustomers.jsx";
+import UpdateCustomer from "./customers/pages/UpdateCustomer.jsx";
+import MainNavigation from "./shared/components/Navigation/MainNavigation.jsx";
+import Auth from "./users/pages/Auth.jsx";
 
 const App = () => {
   return (
@@ -24,6 +26,12 @@ const App = () => {
           </Route>
           <Route path="/customers/new" exact>
             <NewCustomer />
+          </Route>
+          <Route path="/customers/:customerId">
+            <UpdateCustomer />
+          </Route>
+          <Route path="/auth">
+            <Auth />
           </Route>
           <Redirect to="/" />
         </Switch>

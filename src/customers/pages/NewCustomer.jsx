@@ -1,38 +1,14 @@
-import { useCallback, useReducer } from "react";
-
 import Input from "../../shared/components/FormElements/Input.jsx";
 import Button from "../../shared/components/FormElements/Button.jsx";
 
 import { VALIDATOR_REQUIRE } from "../../shared/util/validators.js";
-import "./NewCustomer.css";
+import { useForm } from "../../shared/hooks/form-hook.js";
 
-const formReducer = (state, action) => {
-  let formIsValid;
-  switch (action.type) {
-    case "INPUT_CHANGE":
-      formIsValid = true;
-      for (const inputId in state.inputs) {
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputId]: { value: action.value, isValid: action.isValid },
-        },
-        isValid: formIsValid,
-      };
-    default:
-      return state;
-  }
-};
+import "./CustomerForm.css";
+
 const NewCustomer = () => {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  const [formState, inputHandler] = useForm(
+    {
       name: {
         value: "",
         isValid: false,
@@ -42,19 +18,15 @@ const NewCustomer = () => {
         isValid: false,
       },
     },
-    isValid: false,
-  });
-  const inputHandler = useCallback((id, value, isValid) => {
-    dispatch({
-      type: "INPUT_CHANGE",
-      value: value,
-      isValid: isValid,
-      inputId: id,
-    });
-  }, []);
+    false
+  );
 
+  const customerSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(formState.inputs);
+  };
   return (
-    <form className="customer-form">
+    <form className="customer-form" onSubmit={customerSubmitHandler}>
       <Input
         id="name"
         element="input"
